@@ -2,8 +2,8 @@ const { default: mongoose } = require("mongoose");
 require("dotenv").config();
 
 
-const connect = (url) => {
-    mongoose.connect(url || process.env.MONGODB_URI);
+const connect = () => {
+    mongoose.connect(process.env.MONGODB_URI);
 
     mongoose.connection.on("connected", () => {
         console.log("Connected to MongoDB successfully!")
