@@ -35,26 +35,30 @@ const CreateUser = async (req, res) => {
 // Login Process
 const Login = async (req, res) => {
 
-    const userFromRequest = req.body;
+    try {
+        const userFromRequest = req.body;
 
-    const user = await UserModel.findOne({ email: userFromRequest.email });
+        const user = await UserModel.findOne({ email: userFromRequest.email });
 
-    if (!user){
-      return res.status(301).redirect("/auth/sign_up")
+        if (!user){
+        return res.status(301).redirect("/auth/sign_up")
+        }
+
+        const validPassword = await user.isValidPassword(userFromRequest.password);
+
+        if (!validPassword){
+
+            message = "Email or password is invalid!"
+            return res.status(422).render("log_in", {message: message})
+        }
+
+        token = await jwt.sign({ email: user.email, _id: user._id}, process.env.JWT_SECRET, {expiresIn: "1h"})
+        res.cookie("token", token)
+        message = "Logged in successfully"
+        return res.status(200).render("dashboard", {message: message, user: user})
+    } catch (error) {
+        return res.status(500).send({error: error.message})
     }
-
-    const validPassword = await user.isValidPassword(userFromRequest.password);
-
-    if (!validPassword){
-
-        message = "Email or password is invalid!"
-        return res.status(422).render("log_in", {message: message})
-    }
-
-    token = await jwt.sign({ email: user.email, _id: user._id}, process.env.JWT_SECRET, {expiresIn: "1h"})
-    res.cookie("token", token, { HttpOnly: true})
-    message = "Logged in successfully"
-    return res.status(200).render("dashboard", {message: message, user: user})
 
 }
 
