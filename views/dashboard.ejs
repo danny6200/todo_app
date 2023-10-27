@@ -8,15 +8,17 @@
 
 
 <% if (user) { %>
-    <h1>Hi <%= user.first_name + user.last_name %>,</h1>
+    <h1>Hi <%= user.first_name + " " + user.last_name %>,</h1>
     <p>Get started</p>
 
-    <a href="/tasks">Create Tasks</a>
-    <a href="/tasks">Get All Tasks</a>
-    <a href="/tasks?state=pending">Get Pending Tasks</a>
-    <a href="/tasks?state=completed">Get Completed Tasks</a>
-    <a href="/tasks/:id">Edit Task</a>
-    <a href="/tasks/:id">Delete Task</a>
+    <div style=" display: flex; width: 60%; justify-content: space-evenly; gap: 5rem;">
+        <a href="/tasks/create">Create Tasks</a>
+        <a href="/tasks">Get All Tasks</a>
+        <a href="/tasks?state=pending">Get Pending Tasks</a>
+        <a href="/tasks?state=completed">Get Completed Tasks</a>
+        <!-- <a href="/tasks/:id">Edit Task</a>
+        <a href="/tasks/:id">Delete Task</a> -->
+    </div>
     <a href="/auth/log_out">Log out</a>
 <% } %>
 

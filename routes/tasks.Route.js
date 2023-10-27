@@ -6,13 +6,20 @@ const controller = require("../controllers/tasks.Controller");
 router.use(authmiddleware.bearerTokenAuth);
 
 router.get("/", controller.GetTasks)
+
+router.get("/create", (req, res) => {
+    res.status(200).render("createTask")
+})
+
 router.post("/", middleware.ValidateTaskCreation, controller.CreateTask)
 
+// Edit Task
+router.get("/:id/edit", controller.EditTask)
+
 // Update Task
-router.post("/:id", middleware.ValidateUpdateDetails, controller.UpdateTask)
+router.patch("/:id", middleware.ValidateUpdateDetails, controller.UpdateTask)
 
 //Delete Task
-
-
+router.delete("/:id", controller.DeleteTask)
 
 module.exports = router;

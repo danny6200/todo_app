@@ -1,0 +1,23 @@
+<%- include("partials/header"); %>
+
+<% if (message) { %>
+    <p>
+        <%= message %>
+    </p>
+<% } %>
+
+<h1>Edit State</h1>
+
+<form action="/tasks/<%= task._id %>?_method=PATCH" method="POST">
+    <div>
+        <label for="state">Task State:</label>
+        <input type="text" name="state" id="" required value="<%= task.state %>">
+    </div>
+
+    <input type="submit" value="Submit">
+</form>
+
+<a href="/tasks">Go Home</a>
+<a href="/auth/log_out">Log Out</a>
+
+<%- include("partials/footer"); %>

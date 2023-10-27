@@ -1,0 +1,23 @@
+<%- include("partials/header"); %>
+
+
+<h1>Create your Task</h1>
+
+<form action="/tasks" method="POST">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="" required>
+    </div>
+
+    <div>
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="">
+    </div>
+
+    <input type="submit" value="Create Task">
+</form>
+
+<a href="/tasks">Go Home</a>
+<a href="/auth/log_out">Log Out</a>
+
+<%- include("partials/footer"); %>

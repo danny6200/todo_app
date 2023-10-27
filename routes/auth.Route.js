@@ -22,7 +22,8 @@ router.post("/sign_up", middleware.ValidateUserCreation, controller.CreateUser)
 // Logs in user
 router.post("/log_in", middleware.LoginValidation, controller.Login)
 
-// router.get("/logout", controller.Logout)
+//logs out user
+router.get("/log_out", controller.LogOut)
 
 
 
